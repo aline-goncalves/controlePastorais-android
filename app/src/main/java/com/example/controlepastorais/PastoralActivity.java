@@ -238,24 +238,24 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
     public void clearData(){
         clearPastoralFields();
-        sendToastToTheView("Todos os campos foram limpos!");
+        sendToastToTheView(getString(R.string.all_fields_are_cleaned));
      }
 
     public void submit(){
         if(!isValidData()){
-            sendToastToTheView("Preencha todos os campos!");
+            sendToastToTheView(getString(R.string.fill_all_fields));
         }
 
         if(isValidData() && mode == NEW) {
             startActivityForResult(setDataPastoralNew(), FORM_FILLED);
             clearPastoralFields();
-            sendToastToTheView("Dados enviados com sucesso!");
+            sendToastToTheView(getString(R.string.data_sent_success));
         }
 
         if(isValidData() && mode == EDIT){
             startActivityForResult(setDataPastoralEdit(), FORM_FILLED);
             clearPastoralFields();
-            sendToastToTheView("Dados enviados com sucesso!");
+            sendToastToTheView(getString(R.string.data_sent_success));
         }
     }
 
@@ -381,7 +381,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         isPatronSaintSelected = false;
-        sendToastToTheView("Preencha todos os campos!");
+        sendToastToTheView(getString(R.string.fill_all_fields));
     }
 
     @Override

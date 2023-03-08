@@ -241,7 +241,7 @@ public class PastoralListActivity extends AppCompatActivity {
     }
 
     public void onItemSelected() {
-        listViewPastorais.setOnItemClickListener((adapterView, view, position, id) -> sendToastMessage("Você selecionou a pastoral: " + listViewPastorais.getItemAtPosition(position).toString()));
+        listViewPastorais.setOnItemClickListener((adapterView, view, position, id) -> sendToastMessage(getString(R.string.fill_all_fields) + listViewPastorais.getItemAtPosition(position).toString()));
     }
 
     @Override
