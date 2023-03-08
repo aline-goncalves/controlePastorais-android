@@ -1,5 +1,6 @@
 package com.example.controlepastorais;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +36,8 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     private Pastoral pastoral = new Pastoral();
     private ArrayList<String> interestActivities = new ArrayList<>();
     private boolean isPatronSaintSelected = false;
+
+    public static int FORM_FILLED = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,13 +166,27 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
     public void submit(View view){
         if(isValidData()) {
-            setData();
-            getData();
+            startActivityForResult(setDataPastoral(view), FORM_FILLED);
             clearPastoralFields(view);
             sendToastToTheView("Dados enviados com sucesso!");
         }else{
             sendToastToTheView("Preencha todos os campos!");
         }
+    }
+
+    private Intent setDataPastoral(View view){
+        Intent intent = new Intent(this, PastoralListActivity.class);
+
+        pastoral.setName(editTextName.getText().toString());
+        pastoral.setCoordinator(editTextCoordinator.getText().toString());
+        pastoral.setInterestActivities(interestActivities);
+
+        intent.putExtra(PastoralListActivity.NAME, editTextName.getText().toString());
+        intent.putExtra(PastoralListActivity.COORDINATOR, editTextCoordinator.getText().toString());
+
+        FORM_FILLED = 1;
+
+        return intent;
     }
 
     private void clearPastoralFields(View view){

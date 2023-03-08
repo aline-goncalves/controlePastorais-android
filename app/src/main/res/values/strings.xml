@@ -38,4 +38,17 @@
     <string name="submit_button">Enviar dados</string>
     <string name="clear_all_data_button">Limpar dados</string>
     <string name="pastoral_list_page_title">Lista de Pastorais</string>
+    <string name="app_authorship_page_title">Autoria do Aplicativo</string>
+    <string name="app_author_name_label">Nome da aluna:</string>
+    <string name="author_course_label">Curso:</string>
+    <string name="author_email_label">E-mail:</string>
+    <string name="app_author_name">Aline Toneti Gonçalves</string>
+    <string name="author_course">Curso de Especialização em Tecnologia Java</string>
+    <string name="author_email">toneti.aline@gmail.com</string>
+    <string name="app_description_label">Descrição do Aplicativo</string>
+    <string name="app_description">O Sistema de controle de pastorais tem como objetivo principal auxiliar pessoas que participam de várias pastorais na igreja e possuem certa dificuldade em gerenciar os eventos que cada uma proporciona.</string>
+    <string name="utfpr_image_description">Logo da UTFPR - Campus Cornélio Procópio</string>
+    <string name="new_book_button">Novo</string>
+    <string name="about_app_authorship_button">Sobre</string>
+    <string name="get_back_button">Voltar</string>
 </resources>
