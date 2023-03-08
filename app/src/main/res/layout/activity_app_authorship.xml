@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="50dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="203dp"
+                    android:layout_height="172dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/utfpr_image_description"
+                    android:gravity="end"
+                    app:srcCompat="@drawable/utfpr" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-60dp"
+                android:layout_marginBottom="310dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewPageAppAuthorshipTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/app_authorship_page_title"
+                    android:textAlignment="center"
+                    android:textColor="@color/purple_700"
+                    android:textSize="18sp"
+                    tools:ignore="RtlCompat" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-310dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewAppAuthorNameLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="40dp"
+                        android:text="@string/app_author_name_label"
+                        android:textColor="@color/purple_700"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewAppAuthorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/app_author_name" />
+
+                    <TextView
+                        android:id="@+id/textViewAuthorCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="30dp"
+                        android:gravity="left"
+                        android:text="@string/author_course_label"
+                        android:textColor="@color/purple_700"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/author_course" />
+
+                    <TextView
+                        android:id="@+id/textViewAuthorEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/author_email_label"
+                        android:textColor="@color/purple_700"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/author_email" />
+
+                    <TextView
+                        android:id="@+id/textViewAppDescriptionLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="30dp"
+                        android:gravity="fill_horizontal"
+                        android:text="@string/app_description_label"
+                        android:textColor="@color/purple_700"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewAppDescription"
+                        android:layout_width="340dp"
+                        android:layout_height="218dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/app_description"
+                        tools:flow_horizontalAlign="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonGetBackToTheBookListActivity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:onClick="callPastoralListActivity"
+                    android:text="@string/get_back_button" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

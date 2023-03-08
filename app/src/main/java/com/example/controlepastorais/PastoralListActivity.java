@@ -1,6 +1,9 @@
 package com.example.controlepastorais;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -13,12 +16,27 @@ public class PastoralListActivity extends AppCompatActivity {
     private final ArrayList<String> names = new ArrayList<>();
     private ArrayAdapter<String> pastoralArrayAdapter;
 
+    public static final String NAME = "NAME";
+    public static final String COORDINATOR = "COORDINATOR";
+    public static final String PATRON_SAINT = "PATRON_SAINT";
+    public static final String INTEREST_ACTIVITIES = "INTEREST_ACTIVITIES";
+
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pastoral_list);
 
         findComponentsFromView();
         onItemSelected();
+    }
+
+    public void callAboutAppAuthorshipActivity(View view){
+        Intent intent = new Intent(this, AppAuthorshipActivity.class);
+        startActivity(intent);
+    }
+
+    public void callPastoralRegisterActivity(View view){
+        Intent intent = new Intent(this, PastoralActivity.class);
+        startActivity(intent);
     }
 
     private void findComponentsFromView(){
@@ -33,12 +51,34 @@ public class PastoralListActivity extends AppCompatActivity {
 
     private void populateAdapter(){
         populateBooksList();
+        populatePastoraisListWithDataFromView();
 
         for (Pastoral pastoral : pastorais){
             names.add(pastoral.getName());
         }
 
         pastoralArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
+        PastoralActivity.FORM_FILLED = 0;
+        pastoralArrayAdapter.notifyDataSetChanged();
+    }
+
+    private void populatePastoraisListWithDataFromView(){
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        Pastoral pastoral = new Pastoral();
+
+        if(bundle != null){
+            pastoral.setName(bundle.getString(NAME, ""));
+            pastoral.setCoordinator(bundle.getString(COORDINATOR, ""));
+            pastoral.setPatronSaint(bundle.getString(PATRON_SAINT, ""));
+            pastoral.setMovement(false);
+            ArrayList<String> interestActivities = new ArrayList<>();
+            interestActivities.add(bundle.getString(INTEREST_ACTIVITIES, ""));
+            pastoral.setInterestActivities(interestActivities);
+
+            pastorais.add(pastoral);
+            setResult(Activity.RESULT_OK, intent);
+        }
     }
 
     private void populateBooksList(){
@@ -156,5 +196,15 @@ public class PastoralListActivity extends AppCompatActivity {
 
     public void onItemSelected() {
         listViewPastorais.setOnItemClickListener((adapterView, view, position, id) -> sendToastMessage("Você selecionou a pastoral: " + listViewPastorais.getItemAtPosition(position).toString()));
+    }
+
+    @Override
+    public void onBackPressed() {
+        cancel();
+    }
+
+    public void cancel(){
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 }
