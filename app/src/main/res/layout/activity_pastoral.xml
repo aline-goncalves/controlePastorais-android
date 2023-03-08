@@ -184,7 +184,7 @@
             <RadioGroup
                 android:id="@+id/radioGroupIsMovement"
                 android:layout_width="314dp"
-                android:layout_height="190dp"
+                android:layout_height="98dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp">
 
@@ -218,24 +218,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp" />
-
-            <Button
-                android:id="@+id/buttonCleanData"
-                android:layout_width="291dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
-                android:onClick="clearData"
-                android:text="@string/clear_all_data_button" />
-
-            <Button
-                android:id="@+id/buttonSubmit"
-                android:layout_width="291dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
-                android:onClick="submit"
-                android:text="@string/submit_button" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

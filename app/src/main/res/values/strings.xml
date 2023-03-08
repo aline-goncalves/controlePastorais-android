@@ -31,9 +31,15 @@
             <item>Nossa Senhora de Guadalupe</item>
             <item>Nossa Senhora Aparecida</item>
             <item>Nossa Senhora das Graças</item>
+            <item>Nossa Senhora do Perpétuo Socorro</item>
+            <item>Mãe Rainha</item>
+            <item>Espírito Santo</item>
+            <item>Sagrado Coração de Jesus</item>
+            <item>São Tarcisio</item>
             <item>São José</item>
             <item>Santa Bernadete</item>
             <item>Santa Luzía</item>
+            <item>Outro</item>
         </string-array>
     <string name="submit_button">Enviar dados</string>
     <string name="clear_all_data_button">Limpar dados</string>
@@ -48,7 +54,14 @@
     <string name="app_description_label">Descrição do Aplicativo</string>
     <string name="app_description">O Sistema de controle de pastorais tem como objetivo principal auxiliar pessoas que participam de várias pastorais na igreja e possuem certa dificuldade em gerenciar os eventos que cada uma proporciona.</string>
     <string name="utfpr_image_description">Logo da UTFPR - Campus Cornélio Procópio</string>
-    <string name="new_book_button">Novo</string>
+    <string name="new_pastoral_button">Novo</string>
     <string name="about_app_authorship_button">Sobre</string>
     <string name="get_back_button">Voltar</string>
+    <string name="new_pastoral">Nova Pastoral</string>
+    <string name="edited_pastoral">Editar Pastoral</string>
+    <string name="cancel_edition">Cancelar</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="add_menu_item">Adicionar</string>
+    <string name="about_menu_item">Sobre</string>
 </resources>
