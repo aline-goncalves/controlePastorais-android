@@ -6,7 +6,7 @@ public class Pastoral {
     private String name;
     private String coordinator;
     private boolean isMovement;
-    private ArrayList<String> interestActivities;
+    private String[] interestActivities;
     private String patronSaint;
 
     public String getName() {
@@ -33,11 +33,11 @@ public class Pastoral {
         isMovement = movement;
     }
 
-    public ArrayList<String> getInterestActivities() {
+    public String[] getInterestActivities() {
         return interestActivities;
     }
 
-    public void setInterestActivities(ArrayList<String> interestActivities) {
+    public void setInterestActivities(String[] interestActivities) {
         this.interestActivities = interestActivities;
     }
 

@@ -1,7 +1,10 @@
 package com.example.controlepastorais;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,6 +13,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
@@ -36,8 +41,20 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     private Pastoral pastoral = new Pastoral();
     private ArrayList<String> interestActivities = new ArrayList<>();
     private boolean isPatronSaintSelected = false;
+    private PastoralListActivity pastoralListActivity = new PastoralListActivity();
+
+    private int mode;
+    private static int selectedPosition = -1;
 
     public static int FORM_FILLED = 0;
+    public static final int NEW = 1;
+    public static final int EDIT = 2;
+    public static final String MODE = "MODE";
+    public static final String NAME = "NAME";
+    public static final String COORDINATOR = "COORDINATOR";
+    public static final String PATRON_SAINT = "PATRON_SAINT";
+    public static final String INTEREST_ACTIVITIES = "INTEREST_ACTIVITIES";
+    public static final String IS_MOVEMENT = "IS_MOVEMENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +62,66 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_pastoral);
         findComponents();
         populateSpinnerPatronSaints();
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        if (bundle != null){
+            mode = bundle.getInt(MODE, NEW);
+
+            if (mode == NEW){
+                setTitle(getString(R.string.new_pastoral));
+
+            }else{
+                populateFieldsForEdition(bundle);
+                setTitle(getString(R.string.edited_pastoral));
+            }
+        }
+    }
+
+    private void populateFieldsForEdition(Bundle bundle){
+        pastoral = new Pastoral();
+        if(!bundle.isEmpty()) {
+            pastoral.setName(bundle.getString(NAME));
+            pastoral.setCoordinator(bundle.getString(COORDINATOR));
+            pastoral.setPatronSaint(bundle.getString(PATRON_SAINT));
+            pastoral.setInterestActivities(bundle.getStringArray((INTEREST_ACTIVITIES)));
+
+
+            editTextName.setText(bundle.getString(NAME));
+            editTextCoordinator.setText(bundle.getString(COORDINATOR));
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.register_options, menu);
+        return true;
+    }
+
+    public static void newPastoral(AppCompatActivity appCompatActivity){
+        Intent intent = new Intent(appCompatActivity, PastoralActivity.class);
+        intent.putExtra(MODE, NEW);
+        appCompatActivity.startActivityForResult(intent, NEW);
+    }
+
+    public static void editPastoral(AppCompatActivity appCompatActivity, Pastoral pastoral, int position){
+        Intent intent = new Intent(appCompatActivity, PastoralActivity.class);
+        selectedPosition = position;
+
+        intent.putExtra(MODE, EDIT);
+        intent.putExtra(NAME, pastoral.getName());
+        intent.putExtra(COORDINATOR, pastoral.getCoordinator());
+        intent.putExtra(PATRON_SAINT, pastoral.getPatronSaint());
+        intent.putExtra(INTEREST_ACTIVITIES, pastoral.getInterestActivities());
+        intent.putExtra(IS_MOVEMENT, pastoral.isMovement());
+
+        appCompatActivity.startActivityForResult(intent, EDIT);
     }
 
     private void findComponents(){
@@ -159,27 +236,35 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         spinnerTags.setAdapter(spinnerTagsAdapter);
     }
 
-    public void clearData(View view){
-        clearPastoralFields(view);
+    public void clearData(){
+        clearPastoralFields();
         sendToastToTheView("Todos os campos foram limpos!");
      }
 
-    public void submit(View view){
-        if(isValidData()) {
-            startActivityForResult(setDataPastoral(view), FORM_FILLED);
-            clearPastoralFields(view);
-            sendToastToTheView("Dados enviados com sucesso!");
-        }else{
+    public void submit(){
+        if(!isValidData()){
             sendToastToTheView("Preencha todos os campos!");
+        }
+
+        if(isValidData() && mode == NEW) {
+            startActivityForResult(setDataPastoralNew(), FORM_FILLED);
+            clearPastoralFields();
+            sendToastToTheView("Dados enviados com sucesso!");
+        }
+
+        if(isValidData() && mode == EDIT){
+            startActivityForResult(setDataPastoralEdit(), FORM_FILLED);
+            clearPastoralFields();
+            sendToastToTheView("Dados enviados com sucesso!");
         }
     }
 
-    private Intent setDataPastoral(View view){
+    private Intent setDataPastoralIntent(){
         Intent intent = new Intent(this, PastoralListActivity.class);
 
         pastoral.setName(editTextName.getText().toString());
         pastoral.setCoordinator(editTextCoordinator.getText().toString());
-        pastoral.setInterestActivities(interestActivities);
+        pastoral.setInterestActivities(populateActivities(interestActivities));
 
         intent.putExtra(PastoralListActivity.NAME, editTextName.getText().toString());
         intent.putExtra(PastoralListActivity.COORDINATOR, editTextCoordinator.getText().toString());
@@ -189,7 +274,16 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         return intent;
     }
 
-    private void clearPastoralFields(View view){
+    private String[] populateActivities(ArrayList<String> interestActivities){
+        String[] activities = new String[interestActivities.size()];
+        for (int i = 0; i < interestActivities.size(); i++) {
+            activities[i] = interestActivities.get(i);
+        }
+
+        return activities;
+    }
+
+    private void clearPastoralFields(){
         editTextName.setText(null);
         editTextCoordinator.setText(null);
 
@@ -243,10 +337,12 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         return true;
     }
 
-    private void setData(){
+    private Pastoral setData(){
         pastoral.setName(editTextName.getText().toString());
         pastoral.setCoordinator(editTextCoordinator.getText().toString());
-        pastoral.setInterestActivities(interestActivities);
+        pastoral.setInterestActivities(populateActivities(interestActivities));
+
+        return pastoral;
     }
 
     private void getData(){
@@ -260,6 +356,22 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    private Intent setDataPastoralNew(){
+        Pastoral pastoral = setData();
+        pastoralListActivity.getPastorais().add(pastoral);
+
+        Intent intent = setDataPastoralIntent();
+        return intent;
+    }
+
+    private Intent setDataPastoralEdit(){
+        setData();
+        Intent intent = setDataPastoralIntent();
+        intent.putExtra(String.valueOf(PastoralListActivity.POSITION), selectedPosition);
+
+        return intent;
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         pastoral.setPatronSaint(adapterView.getItemAtPosition(position).toString());
@@ -270,5 +382,37 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> adapterView) {
         isPatronSaintSelected = false;
         sendToastToTheView("Preencha todos os campos!");
+    }
+
+    @Override
+    public void onBackPressed() {
+        cancel();
+    }
+
+    private void cancel(){
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+
+            case R.id.send_data:
+                submit();
+                return true;
+
+            case android.R.id.home:
+                cancel();
+                return true;
+
+            case R.id.clear_data:
+                clearData();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
