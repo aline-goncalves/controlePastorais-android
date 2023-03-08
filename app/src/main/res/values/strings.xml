@@ -37,4 +37,5 @@
         </string-array>
     <string name="submit_button">Enviar dados</string>
     <string name="clear_all_data_button">Limpar dados</string>
+    <string name="pastoral_list_page_title">Lista de Pastorais</string>
 </resources>
