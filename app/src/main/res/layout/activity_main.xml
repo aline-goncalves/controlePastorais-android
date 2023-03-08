@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PastoralActivity">
+
+    <ScrollView
+        android:id="@+id/scrollViewForm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewPageTitle"
+                android:layout_width="160dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="126dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="147dp"
+                android:background="#FFFFFF"
+                android:text="@string/pastorais_register"
+                android:textColor="@color/purple_700" />
+
+            <TextView
+                android:id="@+id/nameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="15dp"
+                android:labelFor="@id/editTextName"
+                android:text="@string/name_label" />
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="316dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textViewCoordinator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:labelFor="@id/editTextCoordinator"
+                android:text="@string/coordinator_label" />
+
+            <EditText
+                android:id="@+id/editTextCoordinator"
+                android:layout_width="314dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textViewInterestActivities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/interest_activities" />
+
+            <CheckBox
+                android:id="@+id/checkBoxVisits"
+                android:layout_width="313dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/visits" />
+
+            <CheckBox
+                android:id="@+id/checkBoxSpiritualityMoments"
+                android:layout_width="315dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/spirituality_moments" />
+
+            <CheckBox
+                android:id="@+id/checkBoxTraining"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/training" />
+
+            <CheckBox
+                android:id="@+id/checkBoxLiturgy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/liturgy" />
+
+            <CheckBox
+                android:id="@+id/checkBoxMeetings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/meetings" />
+
+            <CheckBox
+                android:id="@+id/checkBoxGetTogethers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/get_togethers" />
+
+            <CheckBox
+                android:id="@+id/checkBoxSocialServices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/social_services" />
+
+            <CheckBox
+                android:id="@+id/checkBoxFundraisingEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/fundraising_events" />
+
+            <CheckBox
+                android:id="@+id/checkBoxTrips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/trips" />
+
+            <CheckBox
+                android:id="@+id/checkBoxOthers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="0dp"
+                android:onClick="onCheckboxClicked"
+                android:text="@string/others" />
+
+            <TextView
+                android:id="@+id/textViewIsMovementLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:labelFor="@id/radioGroupIsMovement"
+                android:text="@string/is_movement_label" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupIsMovement"
+                android:layout_width="314dp"
+                android:layout_height="190dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:id="@+id/radioButtonYes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/yes" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonNo"
+                    android:layout_width="314dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textViewPatronSaint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:labelFor="@id/spinnerPatronSaints"
+                android:text="@string/patron_saint" />
+
+            <Spinner
+                android:id="@+id/spinnerPatronSaints"
+                android:layout_width="315dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/buttonCleanData"
+                android:layout_width="291dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:onClick="clearData"
+                android:text="@string/clear_all_data_button" />
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="291dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:onClick="submit"
+                android:text="@string/submit_button" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
