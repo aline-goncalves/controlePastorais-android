@@ -1,7 +1,18 @@
 package com.example.controlepastorais;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "pastorals")
 public class Pastoral {
+    @PrimaryKey(autoGenerate = true)
+    private Long id;
+
+    @NonNull
     private String name;
+
+    @NonNull
     private String coordinator;
     private boolean isMovement;
     private String interestActivities;
@@ -45,5 +56,13 @@ public class Pastoral {
 
     public void setPatronSaint(String patronSaint) {
         this.patronSaint = patronSaint;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
