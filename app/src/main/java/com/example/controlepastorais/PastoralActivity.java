@@ -39,7 +39,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     private Spinner spinnerPatronSaints;
 
     private Pastoral pastoral = new Pastoral();
-    private ArrayList<String> interestActivities = new ArrayList<>();
+    private String interestActivities = "";
     private boolean isPatronSaintSelected = false;
     private PastoralListActivity pastoralListActivity = new PastoralListActivity();
 
@@ -90,7 +90,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
             pastoral.setName(bundle.getString(NAME));
             pastoral.setCoordinator(bundle.getString(COORDINATOR));
             pastoral.setPatronSaint(bundle.getString(PATRON_SAINT));
-            pastoral.setInterestActivities(bundle.getStringArray((INTEREST_ACTIVITIES)));
+            pastoral.setInterestActivities(bundle.getString((INTEREST_ACTIVITIES)));
 
 
             editTextName.setText(bundle.getString(NAME));
@@ -169,58 +169,58 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         switch(view.getId()) {
             case R.id.checkBoxVisits:
                 if (checked) {
-                    interestActivities.add(checkBoxVisits.getText().toString());
+                    interestActivities.concat("; " + checkBoxVisits.getText().toString());
                 }
                 break;
             case R.id.checkBoxSpiritualityMoments:
                 if (checked) {
-                    interestActivities.add(checkBoxSpiritualityMoments.getText().toString());
+                    interestActivities.concat("; " + checkBoxSpiritualityMoments.getText().toString());
                 }
                 break;
             case R.id.checkBoxTraining:
                 if (checked) {
-                    interestActivities.add(checkBoxTraining.getText().toString());
+                    interestActivities.concat("; " + checkBoxTraining.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxLiturgy:
                 if (checked) {
-                    interestActivities.add(checkBoxLiturgy.getText().toString());
+                    interestActivities.concat("; " + checkBoxLiturgy.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxMeetings:
                 if (checked) {
-                    interestActivities.add(checkBoxMeetings.getText().toString());
+                    interestActivities.concat("; " + checkBoxMeetings.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxGetTogethers:
                 if (checked) {
-                    interestActivities.add(checkBoxGetTogethers.getText().toString());
+                    interestActivities.concat("; " + checkBoxGetTogethers.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxSocialServices:
                 if (checked) {
-                    interestActivities.add(checkBoxSocialServices.getText().toString());
+                    interestActivities.concat("; " + checkBoxSocialServices.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxFundraisingEvents:
                 if (checked) {
-                    interestActivities.add(checkBoxFundraisingEvents.getText().toString());
+                    interestActivities.concat("; " + checkBoxFundraisingEvents.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxTrips:
                 if (checked) {
-                    interestActivities.add(checkBoxTrips.getText().toString());
+                    interestActivities.concat("; " + checkBoxTrips.getText().toString());
                 }
                 break;
 
             default:
-                interestActivities.add(checkBoxOthers.getText().toString());
+                interestActivities.concat("; " + checkBoxOthers.getText().toString());
                 break;
         }
     }
@@ -264,7 +264,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
         pastoral.setName(editTextName.getText().toString());
         pastoral.setCoordinator(editTextCoordinator.getText().toString());
-        pastoral.setInterestActivities(populateActivities(interestActivities));
+        pastoral.setInterestActivities(interestActivities);
 
         intent.putExtra(PastoralListActivity.NAME, editTextName.getText().toString());
         intent.putExtra(PastoralListActivity.COORDINATOR, editTextCoordinator.getText().toString());
@@ -272,15 +272,6 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         FORM_FILLED = 1;
 
         return intent;
-    }
-
-    private String[] populateActivities(ArrayList<String> interestActivities){
-        String[] activities = new String[interestActivities.size()];
-        for (int i = 0; i < interestActivities.size(); i++) {
-            activities[i] = interestActivities.get(i);
-        }
-
-        return activities;
     }
 
     private void clearPastoralFields(){
@@ -340,7 +331,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     private Pastoral setData(){
         pastoral.setName(editTextName.getText().toString());
         pastoral.setCoordinator(editTextCoordinator.getText().toString());
-        pastoral.setInterestActivities(populateActivities(interestActivities));
+        pastoral.setInterestActivities(interestActivities);
 
         return pastoral;
     }
@@ -350,10 +341,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         System.out.println("Coordenador: " + pastoral.getCoordinator());
         System.out.println("Santo(a) Padroeiro(a): " + pastoral.getPatronSaint());
         System.out.println("É um movimento? " + (pastoral.isMovement() ? "Sim" : "Não"));
-        System.out.println("Atividades de interesse: ");
-        for(String activity : pastoral.getInterestActivities()) {
-            System.out.println(activity + "\n");
-        }
+        System.out.println("Atividades de interesse: " + pastoral.getInterestActivities());
     }
 
     private Intent setDataPastoralNew(){

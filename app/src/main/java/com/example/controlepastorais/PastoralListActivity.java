@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
 public class PastoralListActivity extends AppCompatActivity {
@@ -120,7 +121,7 @@ public class PastoralListActivity extends AppCompatActivity {
             pastoral.setCoordinator(bundle.getString(COORDINATOR, ""));
             pastoral.setPatronSaint(bundle.getString(PATRON_SAINT, ""));
             pastoral.setMovement(false);
-            pastoral.setInterestActivities(bundle.getStringArray(INTEREST_ACTIVITIES));
+            pastoral.setInterestActivities(bundle.getString(INTEREST_ACTIVITIES));
 
             pastorais.add(pastoral);
             setResult(Activity.RESULT_OK, intent);
@@ -129,14 +130,14 @@ public class PastoralListActivity extends AppCompatActivity {
 
     private void populatePastoraisList(){
         Pastoral pastoral;
-        String[] interestActivities = new String[20];
+        String interestActivities = "";
 
         pastoral = new Pastoral();
         pastoral.setName("Pastoral do Batismo");
         pastoral.setCoordinator("José Carlos Cardoso");
         pastoral.setPatronSaint("Espírito Santo");
         pastoral.setMovement(false);
-        interestActivities[0] = getResources().getString(R.string.training);
+        interestActivities = getResources().getString(R.string.training);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -145,8 +146,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Emanoel da Silva");
         pastoral.setPatronSaint("Santa Terezinha");
         pastoral.setMovement(true);
-        interestActivities[0] = getResources().getString(R.string.fundraising_events);
-        interestActivities[1] = getResources().getString(R.string.social_services);
+        interestActivities = getResources().getString(R.string.fundraising_events) + "; " + getResources().getString(R.string.social_services);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -155,9 +155,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Aline Gonçalves");
         pastoral.setPatronSaint("Nossa Senhora de Guadalupe");
         pastoral.setMovement(true);
-        interestActivities[0] = getResources().getString(R.string.training);
-        interestActivities[1] = getResources().getString(R.string.spirituality_moments);
-        interestActivities[2] = getResources().getString(R.string.get_togethers);
+        interestActivities = getResources().getString(R.string.training) + "; " + getResources().getString(R.string.spirituality_moments) + "; " + getResources().getString(R.string.get_togethers);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -166,9 +164,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Leonardo de Paula");
         pastoral.setPatronSaint("Santa Clara");
         pastoral.setMovement(false);
-        interestActivities[0] = getResources().getString(R.string.others);
-        interestActivities[1] = getResources().getString(R.string.get_togethers);
-        interestActivities[2] = getResources().getString(R.string.meetings);
+        interestActivities = getResources().getString(R.string.others) + "; " + getResources().getString(R.string.get_togethers) + "; " + getResources().getString(R.string.meetings);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -177,9 +173,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Rosa Toneti");
         pastoral.setPatronSaint("Mãe Rainha");
         pastoral.setMovement(true);
-        interestActivities[0] = getResources().getString(R.string.spirituality_moments);
-        interestActivities[1] = getResources().getString(R.string.liturgy);
-        interestActivities[2] = getResources().getString(R.string.meetings);
+        interestActivities = getResources().getString(R.string.spirituality_moments) + "; " + getResources().getString(R.string.liturgy) + "; " + getResources().getString(R.string.meetings);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -188,8 +182,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Angela Toneti");
         pastoral.setPatronSaint("Nossa Senhora das Graças");
         pastoral.setMovement(false);
-        interestActivities[0] = getResources().getString(R.string.liturgy);
-        interestActivities[1] = getResources().getString(R.string.training);
+        interestActivities = getResources().getString(R.string.liturgy) + "; " + getResources().getString(R.string.training);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -198,8 +191,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Lauro Sarachi");
         pastoral.setPatronSaint("Mãe Rainha");
         pastoral.setMovement(true);
-        interestActivities[0] = getResources().getString(R.string.spirituality_moments);
-        interestActivities[1] = getResources().getString(R.string.liturgy);
+        interestActivities = getResources().getString(R.string.spirituality_moments) + "; " + getResources().getString(R.string.liturgy);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -208,8 +200,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Cindy Navarini");
         pastoral.setPatronSaint("Nossa Senhora do Perpétuo Socorro");
         pastoral.setMovement(false);
-        interestActivities[0] = getResources().getString(R.string.trips);
-        interestActivities[1] = getResources().getString(R.string.others);
+        interestActivities = getResources().getString(R.string.trips) + "; " + getResources().getString(R.string.others);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -218,10 +209,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Neuza Natal");
         pastoral.setPatronSaint("Sagrado Coração de Jesus");
         pastoral.setMovement(true);
-        interestActivities[0] = getResources().getString(R.string.spirituality_moments);
-        interestActivities[1] = getResources().getString(R.string.liturgy);
-        interestActivities[2] = getResources().getString(R.string.trips);
-        interestActivities[3] = getResources().getString(R.string.meetings);
+        interestActivities = getResources().getString(R.string.spirituality_moments) + "; " + getResources().getString(R.string.liturgy) + "; " + getResources().getString(R.string.trips) + "; " + getResources().getString(R.string.meetings);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
 
@@ -230,8 +218,7 @@ public class PastoralListActivity extends AppCompatActivity {
         pastoral.setCoordinator("Leticia Batistel");
         pastoral.setPatronSaint("São Tarcisio");
         pastoral.setMovement(false);
-        interestActivities[0] = getResources().getString(R.string.training);
-        interestActivities[1] = getResources().getString(R.string.liturgy);
+        interestActivities = getResources().getString(R.string.training) + "; " + getResources().getString(R.string.liturgy);
         pastoral.setInterestActivities(interestActivities);
         pastorais.add(pastoral);
     }
