@@ -69,4 +69,8 @@
     <string name="fill_all_fields">Fill in all fields!</string>
     <string name="data_sent_success">Data sent with success!</string>
     <string name="app_description">The main objective of the pastoral control system is to help people who participate in several pastorals in the church and have some difficulty in managing the events that each one provides.</string>
+    <string name="confirm_deletion_message">Do you really want to delete the pastoral</string>
+    <string name="warning">Warning!</string>
+    <string name="ok">Ok</string>
+    <string name="confirmation">Confirmation</string>
 </resources>

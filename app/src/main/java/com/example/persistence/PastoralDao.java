@@ -23,6 +23,9 @@ public interface PastoralDao {
     @Query("SELECT * FROM pastorals WHERE id = :id")
     Pastoral queryForId(long id);
 
+    @Query("SELECT * FROM pastorals WHERE name = :name")
+    Pastoral queryForName(String name);
+
     @Query("SELECT * FROM pastorals ORDER BY name ASC")
     List<Pastoral> queryAll();
 }

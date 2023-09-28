@@ -16,7 +16,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.ArrayList;
+
+import com.example.persistence.PastoralDatabase;
 
 public class PastoralActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText editTextName;
@@ -50,6 +51,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     public static final int NEW = 1;
     public static final int EDIT = 2;
     public static final String MODE = "MODE";
+    public static final String ID = "ID";
     public static final String NAME = "NAME";
     public static final String COORDINATOR = "COORDINATOR";
     public static final String PATRON_SAINT = "PATRON_SAINT";
@@ -76,25 +78,23 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
             if (mode == NEW){
                 setTitle(getString(R.string.new_pastoral));
+                pastoral = new Pastoral();
 
             }else{
-                populateFieldsForEdition(bundle);
                 setTitle(getString(R.string.edited_pastoral));
+
+                long id = bundle.getLong(ID);
+                PastoralDatabase database = PastoralDatabase.getDatabase(this);
+                pastoral = database.pastoralDao().queryForId(id);
+                populateFieldsForEdition(pastoral);
             }
         }
     }
 
-    private void populateFieldsForEdition(Bundle bundle){
-        pastoral = new Pastoral();
-        if(!bundle.isEmpty()) {
-            pastoral.setName(bundle.getString(NAME));
-            pastoral.setCoordinator(bundle.getString(COORDINATOR));
-            pastoral.setPatronSaint(bundle.getString(PATRON_SAINT));
-            pastoral.setInterestActivities(bundle.getString((INTEREST_ACTIVITIES)));
-
-
-            editTextName.setText(bundle.getString(NAME));
-            editTextCoordinator.setText(bundle.getString(COORDINATOR));
+    private void populateFieldsForEdition(Pastoral pastoral){
+        if(pastoral != null) {
+            editTextName.setText(pastoral.getName());
+            editTextCoordinator.setText(pastoral.getCoordinator());
         }
     }
 
@@ -110,11 +110,11 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         appCompatActivity.startActivityForResult(intent, NEW);
     }
 
-    public static void editPastoral(AppCompatActivity appCompatActivity, Pastoral pastoral, int position){
+    public static void editPastoral(AppCompatActivity appCompatActivity, Pastoral pastoral){
         Intent intent = new Intent(appCompatActivity, PastoralActivity.class);
-        selectedPosition = position;
 
         intent.putExtra(MODE, EDIT);
+        intent.putExtra(ID, pastoral.getId());
         intent.putExtra(NAME, pastoral.getName());
         intent.putExtra(COORDINATOR, pastoral.getCoordinator());
         intent.putExtra(PATRON_SAINT, pastoral.getPatronSaint());
@@ -242,24 +242,28 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
      }
 
     public void submit(){
+        PastoralDatabase database = PastoralDatabase.getDatabase(this);
+
         if(!isValidData()){
             sendToastToTheView(getString(R.string.fill_all_fields));
         }
 
         if(isValidData() && mode == NEW) {
             startActivityForResult(setDataPastoralNew(), FORM_FILLED);
+            database.pastoralDao().insert(setDataPastoral());
             clearPastoralFields();
             sendToastToTheView(getString(R.string.data_sent_success));
         }
 
         if(isValidData() && mode == EDIT){
             startActivityForResult(setDataPastoralEdit(), FORM_FILLED);
+            database.pastoralDao().update(pastoral);
             clearPastoralFields();
             sendToastToTheView(getString(R.string.data_sent_success));
         }
     }
 
-    private Intent setDataPastoralIntent(){
+    private Intent setDataPastoralIntent(Pastoral pastoral){
         Intent intent = new Intent(this, PastoralListActivity.class);
 
         pastoral.setName(editTextName.getText().toString());
@@ -328,7 +332,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         return true;
     }
 
-    private Pastoral setData(){
+    private Pastoral setDataPastoral(){
         pastoral.setName(editTextName.getText().toString());
         pastoral.setCoordinator(editTextCoordinator.getText().toString());
         pastoral.setInterestActivities(interestActivities);
@@ -336,25 +340,16 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         return pastoral;
     }
 
-    private void getData(){
-        System.out.println("Nome: " + pastoral.getName());
-        System.out.println("Coordenador: " + pastoral.getCoordinator());
-        System.out.println("Santo(a) Padroeiro(a): " + pastoral.getPatronSaint());
-        System.out.println("É um movimento? " + (pastoral.isMovement() ? "Sim" : "Não"));
-        System.out.println("Atividades de interesse: " + pastoral.getInterestActivities());
-    }
-
     private Intent setDataPastoralNew(){
-        Pastoral pastoral = setData();
-        pastoralListActivity.getPastorais().add(pastoral);
+        Pastoral pastoral = setDataPastoral();
+        pastoralListActivity.getPastoralsNames().add(pastoral.getName());
 
-        Intent intent = setDataPastoralIntent();
+        Intent intent = setDataPastoralIntent(pastoral);
         return intent;
     }
 
     private Intent setDataPastoralEdit(){
-        setData();
-        Intent intent = setDataPastoralIntent();
+        Intent intent = setDataPastoralIntent(setDataPastoral());
         intent.putExtra(String.valueOf(PastoralListActivity.POSITION), selectedPosition);
 
         return intent;
@@ -384,9 +379,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch(item.getItemId()){
-
             case R.id.send_data:
                 submit();
                 return true;

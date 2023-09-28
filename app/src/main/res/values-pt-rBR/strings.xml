@@ -47,4 +47,8 @@
     <string name="data_sent_success">Dados enviados com sucesso!</string>
     <string name="you_selected">"Você selecionou a pastoral: "</string>
     <string name="app_description">O Sistema de controle de pastorais tem como objetivo principal auxiliar pessoas que participam de várias pastorais na igreja e possuem certa dificuldade em gerenciar os eventos que cada uma proporciona.</string>
+    <string name="confirm_deletion_message">"Você realmete deseja remover a pastoral "</string>
+    <string name="warning">Atenção!</string>
+    <string name="ok">Ok</string>
+    <string name="confirmation">Confirmação</string>
 </resources>
