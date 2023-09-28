@@ -100,6 +100,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
             populateCheckBox(pastoral);
             populateRadioButtons(pastoral);
             populateSpinner(pastoral);
+            populateInterestActivitiesArray(pastoral);
         }
     }
 
@@ -241,7 +242,6 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        populateInterestActivitiesArray(pastoral);
 
         switch(view.getId()) {
             case R.id.checkBoxVisits:
