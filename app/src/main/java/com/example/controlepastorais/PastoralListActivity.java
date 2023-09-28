@@ -130,7 +130,7 @@ public class PastoralListActivity extends AppCompatActivity {
             names.add(p.getName());
         }
 
-        pastoralArrayAdapter = new ArrayAdapter<String>(this,
+        pastoralArrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 names);
 

@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.persistence.PastoralDatabase;
 
+import java.util.ArrayList;
+
 public class PastoralActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText editTextName;
     private EditText editTextCoordinator;
@@ -41,6 +43,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
     private Pastoral pastoral = new Pastoral();
     private String interestActivities = "";
+    private ArrayList<String> interestActivitiesArray = new ArrayList<>();
     private boolean isPatronSaintSelected = false;
     private PastoralListActivity pastoralListActivity = new PastoralListActivity();
 
@@ -93,9 +96,72 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
     private void populateFieldsForEdition(Pastoral pastoral){
         if(pastoral != null) {
-            editTextName.setText(pastoral.getName());
-            editTextCoordinator.setText(pastoral.getCoordinator());
+            populateEditTexts(pastoral);
+            populateCheckBox(pastoral);
+            populateRadioButtons(pastoral);
+            populateSpinner(pastoral);
         }
+    }
+
+    private void populateEditTexts(Pastoral pastoral){
+        editTextName.setText(pastoral.getName());
+        editTextCoordinator.setText(pastoral.getCoordinator());
+    }
+
+    private void populateCheckBox(Pastoral pastoral){
+        String[] arrOfStr = pastoral.getInterestActivities().split("; ", 11);
+
+        for (String s : arrOfStr) {
+            if(s.equals(checkBoxVisits.getText().toString())) {
+                checkBoxVisits.setChecked(true);
+            }
+
+            if(s.equals(checkBoxSpiritualityMoments.getText().toString())) {
+                checkBoxSpiritualityMoments.setChecked(true);
+            }
+
+            if(s.equals(checkBoxTraining.getText().toString())) {
+                checkBoxTraining.setChecked(true);
+            }
+
+            if(s.equals(checkBoxLiturgy.getText().toString())) {
+                checkBoxLiturgy.setChecked(true);
+            }
+
+            if(s.equals(checkBoxMeetings.getText().toString())) {
+                checkBoxMeetings.setChecked(true);
+            }
+
+            if(s.equals(checkBoxGetTogethers.getText().toString())) {
+                checkBoxGetTogethers.setChecked(true);
+            }
+
+            if(s.equals(checkBoxSocialServices.getText().toString())) {
+                checkBoxSocialServices.setChecked(true);
+            }
+
+            if(s.equals(checkBoxFundraisingEvents.getText().toString())) {
+                checkBoxFundraisingEvents.setChecked(true);
+            }
+
+            if(s.equals(checkBoxTrips.getText().toString())) {
+                checkBoxTrips.setChecked(true);
+            }
+
+            if(s.equals(checkBoxOthers.getText().toString())) {
+                checkBoxOthers.setChecked(true);
+            }
+        }
+    }
+
+    private void populateRadioButtons(Pastoral pastoral){
+        radioButtonYes.setChecked(pastoral.isMovement());
+        radioButtonNo.setChecked(!pastoral.isMovement());
+    }
+
+    private void populateSpinner(Pastoral pastoral){
+        ArrayAdapter<CharSequence> options = populateSpinnerPatronSaints();
+        spinnerPatronSaints.setSelection(options.getPosition(pastoral.getPatronSaint()));
     }
 
     @Override
@@ -142,7 +208,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         checkBoxGetTogethers = findViewById(R.id.checkBoxGetTogethers);
         checkBoxLiturgy = findViewById(R.id.checkBoxLiturgy);
 
-        spinnerPatronSaints = (Spinner) findViewById(R.id.spinnerPatronSaints);
+        spinnerPatronSaints = findViewById(R.id.spinnerPatronSaints);
         spinnerPatronSaints.setOnItemSelectedListener(this);
     }
 
@@ -163,70 +229,81 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    private void populateInterestActivitiesArray(Pastoral pastoral){
+        String[] interestActivities = pastoral.getInterestActivities().split("; ", 11);
+
+        for (String s : interestActivities) {
+            if(!s.equals("")) {
+                interestActivitiesArray.add(s);
+            }
+        }
+    }
+
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
+        populateInterestActivitiesArray(pastoral);
 
         switch(view.getId()) {
             case R.id.checkBoxVisits:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxVisits.getText().toString());
+                    interestActivitiesArray.add(checkBoxVisits.getText().toString());
                 }
                 break;
             case R.id.checkBoxSpiritualityMoments:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxSpiritualityMoments.getText().toString());
+                    interestActivitiesArray.add(checkBoxSpiritualityMoments.getText().toString());
                 }
                 break;
             case R.id.checkBoxTraining:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxTraining.getText().toString());
+                    interestActivitiesArray.add(checkBoxTraining.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxLiturgy:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxLiturgy.getText().toString());
+                    interestActivitiesArray.add(checkBoxLiturgy.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxMeetings:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxMeetings.getText().toString());
+                    interestActivitiesArray.add(checkBoxMeetings.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxGetTogethers:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxGetTogethers.getText().toString());
+                    interestActivitiesArray.add(checkBoxGetTogethers.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxSocialServices:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxSocialServices.getText().toString());
+                    interestActivitiesArray.add(checkBoxSocialServices.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxFundraisingEvents:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxFundraisingEvents.getText().toString());
+                    interestActivitiesArray.add(checkBoxFundraisingEvents.getText().toString());
                 }
                 break;
 
             case R.id.checkBoxTrips:
                 if (checked) {
-                    interestActivities.concat("; " + checkBoxTrips.getText().toString());
+                    interestActivitiesArray.add(checkBoxTrips.getText().toString());
                 }
                 break;
 
             default:
-                interestActivities.concat("; " + checkBoxOthers.getText().toString());
+                interestActivitiesArray.add(checkBoxOthers.getText().toString());
                 break;
         }
     }
 
-    public void populateSpinnerPatronSaints(){
-        Spinner spinnerTags = (Spinner) findViewById(R.id.spinnerPatronSaints);
+    public ArrayAdapter<CharSequence> populateSpinnerPatronSaints(){
+        Spinner spinnerTags = findViewById(R.id.spinnerPatronSaints);
         ArrayAdapter<CharSequence> spinnerTagsAdapter = ArrayAdapter
                 .createFromResource(
                         this,
@@ -234,6 +311,7 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
                         androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item);
         spinnerTagsAdapter.setDropDownViewResource(androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item);
         spinnerTags.setAdapter(spinnerTagsAdapter);
+        return spinnerTagsAdapter;
     }
 
     public void clearData(){
@@ -268,7 +346,6 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
 
         pastoral.setName(editTextName.getText().toString());
         pastoral.setCoordinator(editTextCoordinator.getText().toString());
-        pastoral.setInterestActivities(interestActivities);
 
         intent.putExtra(PastoralListActivity.NAME, editTextName.getText().toString());
         intent.putExtra(PastoralListActivity.COORDINATOR, editTextCoordinator.getText().toString());
@@ -335,9 +412,19 @@ public class PastoralActivity extends AppCompatActivity implements AdapterView.O
     private Pastoral setDataPastoral(){
         pastoral.setName(editTextName.getText().toString());
         pastoral.setCoordinator(editTextCoordinator.getText().toString());
-        pastoral.setInterestActivities(interestActivities);
+        pastoral.setInterestActivities(returnInterestActivities());
 
         return pastoral;
+    }
+
+    private String returnInterestActivities(){
+        String interestActivities = "";
+
+        for (String activity : interestActivitiesArray) {
+            interestActivities = interestActivities + "; " + activity;
+        }
+
+        return interestActivities;
     }
 
     private Intent setDataPastoralNew(){
